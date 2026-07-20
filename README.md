@@ -10,6 +10,7 @@ Deployment Steps ->
 7. Verify both applications are accessible.
 
 Commands Used -> 
+scp -i <your-key>.pem -r <project-folder> ubuntu@<ec2-public-dns>:~/folder
 cd backend
 source venv/bin/activate
 nohup python app.py > backend.log 2>&1 &
