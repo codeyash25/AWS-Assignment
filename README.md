@@ -39,14 +39,14 @@ Deployment Steps ->
 Commands Used ->
 
 Backend EC2 : 
-scp -i <your-key>.pem -r <backend-folder> ubuntu@<backend-ec2-public-dns>:~/BackEnd
+scp -i  backend-aws.pem -r backend ubuntu@<backend-ec2-public-dns>:~/BackEnd
 
 source venv/bin/activate
 nohup python app.py > backend.log 2>&1 &
 
 Frontend EC2
 
-scp -i <your-key>.pem -r <frontend-folder> ubuntu@<frontend-ec2-public-dns>:~/FrontEnd
+scp -i frontend_aws.pem -r frontend ubuntu@<frontend-ec2-public-dns>:~/FrontEnd
 
 export BACKEND_URL=http://13.127.237.6:8000/api
 nohup node app.js > frontend.log 2>&1 &
