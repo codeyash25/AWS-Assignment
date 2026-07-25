@@ -56,3 +56,56 @@ Public URLs :
 Backend API: http://13.127.237.6:8000/api
 
 Frontend : http://13.203.229.212:3000/
+
+ C. Deploy Your Flask Backend and Express Frontend Docker Containers using AWS ECR, ECS and VPC.
+
+ Solution
+
+# Deployment Steps ->
+
+1. Create Dockerfiles for the Flask backend and Express frontend.
+2. Build Docker images for both applications.
+3. Create separate Amazon ECR repositories for the backend and frontend.
+4. Authenticate Docker with Amazon ECR.
+5. Tag and push the Docker images to their respective ECR repositories.
+6. Create an Amazon ECS Cluster.
+7. Create Task Definitions for the backend and frontend containers.
+8. Configure CPU, Memory, Port Mapping, CloudWatch Logs, and Task Execution Role.
+9. Create ECS Services for both task definitions.
+10. Configure the VPC, Subnets, Security Groups, and assign a Public IP.
+11. Deploy the ECS Services and wait until the tasks are in the **RUNNING** state.
+12. Verify that both the backend API and frontend application are accessible.
+
+ Commands Used ->
+
+bash
+# Build Docker Images
+docker build -t backend .
+docker build -t frontend .
+
+# Login to Amazon ECR
+aws ecr get-login-password --region ap-south-1 | docker login --username AWS --password-stdin <ACCOUNT_ID>.dkr.ecr.ap-south-1.amazonaws.com
+
+# Tag Images
+docker tag backend:latest <ACCOUNT_ID>.dkr.ecr.ap-south-1.amazonaws.com/backend:latest
+docker tag frontend:latest <ACCOUNT_ID>.dkr.ecr.ap-south-1.amazonaws.com/frontend:latest
+
+# Push Images
+docker push <ACCOUNT_ID>.dkr.ecr.ap-south-1.amazonaws.com/backend:latest
+docker push <ACCOUNT_ID>.dkr.ecr.ap-south-1.amazonaws.com/frontend:latest
+
+
+ AWS Services Used ->
+
+- Amazon ECR
+- Amazon ECS
+- Amazon VPC
+- CloudWatch Logs
+- IAM Roles
+- Security Groups
+
+ Public URLs ->
+
+Backend API : http://43.205.134.26:8000/api
+
+Frontend : http://43.205.134.26:3000/
